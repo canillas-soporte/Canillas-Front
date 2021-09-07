@@ -21,6 +21,7 @@ import minifyHTML from 'rollup-plugin-minify-html-literals';
 import copy from 'rollup-plugin-copy';
 import uglify from "@lopatnov/rollup-plugin-uglify";
 import commonjs from 'rollup-plugin-commonjs';
+import scss from 'rollup-plugin-scss';
 // Compila los decoradores de lit-element a JS nativo
 import { inlineLitElement } from 'rollup-plugin-inline-lit-element'
 
@@ -42,16 +43,30 @@ const copyConfig = {
 
 const babelConfig = {
     babelrc: false,
+    babelHelpers: 'runtime',
     exclude: 'node_modules/**',
     ...{
+        exclude: 'node_modules/**',
         presets: [
-            [
+            [   
                 '@babel/preset-env', {
+                    useBuiltIns: false,
                     targets: {
                         ie: '11'
-                    }
+                    },
                 }
             ]
+        ],
+        plugins: [
+            ["@babel/plugin-proposal-decorators", { "legacy": true }],
+            ["@babel/plugin-proposal-class-properties", { "loose": true }],
+            ["@babel/plugin-transform-runtime", {
+                "absoluteRuntime": false,
+                "corejs": false,
+                "helpers": true,
+                "regenerator": true,
+                "version": "7.0.0-beta.0"
+            }]
         ]
     }
 }
@@ -89,7 +104,8 @@ const configs = [
 ];
 
 const config = {
-    input: ['src/components/shop-app.js', 'src/components/**/*.js'],
+    input: ['src/components/shop-app.js', 'src/components/**/*.js', 'src/controller/**/*.js',
+        'src/controller/*.js'],
     output: {
         dir: `build-modern/src/`,
         format: 'es'
@@ -99,15 +115,22 @@ const config = {
         babel(babelConfig),
         minifyHTML(),
         copy(copyConfig),
+        commonjs({
+            namedExports: {
+                'node_modules/@babel/runtime/regenerator/index.js': ['isValidElementType'],
+            } 
+        }),
         resolve(),
         replace({
             // Recogemos el valor y lo convertimos
             ENV: JSON.stringify(process.env.NODE_ENV || 'development')
         }),
         alias({
+            fint: '@Controller', replacement: './controller',
             find: '@Components', replacement: './components',
             find: '@Utilities', replacement: './utilities'
-        })
+        }),
+        scss()
     ],
     preserveEntrySignatures: false,
 }

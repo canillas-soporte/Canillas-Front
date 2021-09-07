@@ -1,6 +1,11 @@
 import { LitElement, html } from 'lit-element';
+import cnnavbarStyle from './cn-navnar-css.js';
 
   class CNNavbar extends LitElement {
+
+    get styles() {
+      return cnnavbarStyle;
+    }
 
     get properties() {
       return {
@@ -9,16 +14,9 @@ import { LitElement, html } from 'lit-element';
     }
 
     constructor() {
+      console.log(cnnavbarStyle);
       super();
       this.text = "Validar";
-      const sheet = new CSSStyleSheet();
-      sheet.replace('@import url("cn-navnar.css")')
-        .then(sheet => {
-          console.log('Styles loaded successfully');
-        })
-        .catch(err => {
-          console.error('Failed to load:', err);
-        });
     }
 
     // Implement `render` to define a template for your element.
@@ -30,8 +28,8 @@ import { LitElement, html } from 'lit-element';
        * with the `html` helper function.
        */
       return html`
-        <style> @import "./cn-navbar.css"; </style>
-        <nav>Adios</nav>
+        ${cnnavbarStyle}
+        <nav class="navbar">Adios</nav>
     `;
     }
   }
