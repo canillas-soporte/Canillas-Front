@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+      "outDir": "./build-modern/src" ,
+      "rootDir": "./" ,
+      /* Experimental Options */
+      "experimentalDecorators": true, 
+      "emitDecoratorMetadata": true, 
+      /* Advanced Options */
+      "forceConsistentCasingInFileNames": true 
+    }
+  }
