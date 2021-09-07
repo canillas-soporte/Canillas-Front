@@ -126,7 +126,7 @@ const config = {
             ENV: JSON.stringify(process.env.NODE_ENV || 'development')
         }),
         alias({
-            fint: '@Controller', replacement: './controller',
+            find: '@Controller', replacement: './controller',
             find: '@Components', replacement: './components',
             find: '@Utilities', replacement: './utilities'
         }),

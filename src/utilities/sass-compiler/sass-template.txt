@@ -1,0 +1,2 @@
+import { css as <% varName %>Css  } from 'lit-element';
+export const <% varName %>Style = <% varName %>Css`<% content %>`;

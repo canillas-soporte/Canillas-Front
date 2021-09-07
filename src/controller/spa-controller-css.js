@@ -1,2 +1,2 @@
-import {html} from 'lit-element';
-export default html`<style></style>`;
+import { css as spacontrollerCss  } from 'lit-element';
+export const spacontrollerStyle = spacontrollerCss``;
