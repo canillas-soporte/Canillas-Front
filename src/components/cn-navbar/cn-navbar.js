@@ -1,5 +1,5 @@
 import { LitElement, html } from 'lit-element';
-import cnnavbarStyle from './cn-navnar-css.js';
+import {cnnavnarStyle} from './cn-navnar-css.js';
 
   class CNNavbar extends LitElement {
 
@@ -28,7 +28,6 @@ import cnnavbarStyle from './cn-navnar-css.js';
        * with the `html` helper function.
        */
       return html`
-        ${cnnavbarStyle}
         <nav class="navbar">Adios</nav>
     `;
     }

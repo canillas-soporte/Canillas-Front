@@ -1,7 +1,7 @@
 import { customElement, LitElement } from "lit-element";
 import { ROUTES } from "./routes/spa-routes";
 import {router} from "lit-element-router";
-import spacontrollerStyle from './spa-controller-css.js';
+import { spacontrollerStyle} from './spa-controller-css.js';
 
 @customElement('spa-controller')
 @router

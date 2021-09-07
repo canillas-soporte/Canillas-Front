@@ -11,11 +11,10 @@
     "build:watch": "NODE_ENV=watch ./node_modules/.bin/rollup -c",
     "compile-sass": "sass src/components/ ",
     "sass:lint": "stylelint \"src/components/**/*.scss\"",
-    "compile-css": "sass-render ./src/components/**/**.scss && sass-render ./src/controller/*.scss",
     "dev": "npm-run-all --parallel build:dev compile-sass compile-css",
     "dev_w": "npm-run-all --parallel build:watch compile-sass",
     "pro": "npm-run-all --parallel build compile-sass",
-    "exp": "node ./src/utilities/sass-compiler/sass-compiler.js"
+    "compile-css": "node ./src/utilities/sass-compiler/sass-compiler.js"
   },
   "keywords": [],
   "author": "",
