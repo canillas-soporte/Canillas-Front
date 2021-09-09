@@ -1,35 +1,46 @@
-import { LitElement, html } from 'lit-element';
-import {cnnavnarStyle} from './cn-navnar-css.js';
+import { LitElement, html, css } from 'lit-element';
+import { cnnavnarStyle } from './cn-navnar-css.js';
 
-  class CNNavbar extends LitElement {
+class CNNavbar extends LitElement {
 
-    get styles() {
-      return cnnavbarStyle;
-    }
+  static get styles() {
+    return css`
+      ${cnnavnarStyle}`;
+  }
 
-    get properties() {
-      return {
-        text: { type: String }
-      }
-    }
+  get properties() {
+    return {
+      logo: {
+        type: String
+      },
+      text: { 
+        type: String 
+      },
 
-    constructor() {
-      console.log(cnnavbarStyle);
-      super();
-      this.text = "Validar";
-    }
-
-    // Implement `render` to define a template for your element.
-    render() {
-      /**
-       * Return a lit-html `TemplateResult`.
-       *
-       * To create a `TemplateResult`, tag a JavaScript template literal
-       * with the `html` helper function.
-       */
-      return html`
-        <nav class="navbar">Adios</nav>
-    `;
     }
   }
+
+  constructor() {
+    super();
+    this.text = "Validar";
+  }
+
+  // Implement `render` to define a template for your element.
+  render() {
+    /**
+     * Return a ../../@Modules/lit-element/lit-element.js `TemplateResult`.
+     *
+     * To create a `TemplateResult`, tag a JavaScript template literal
+     * with the `html` helper function.
+     */
+    return html`
+        <nav class="navbar">
+          <div class="navbar__logo">
+            <h1 class="navbar__title">Canillas</h1>
+          </div>
+          <div class="navbar__links"></div>
+        </nav>
+    `;
+  }
+}
 customElements.define('cn-navbar', CNNavbar);

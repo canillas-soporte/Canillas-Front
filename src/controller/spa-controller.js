@@ -1,7 +1,10 @@
-import { customElement, LitElement } from "lit-element";
+import { customElement, LitElement, html } from "lit-element";
 import { ROUTES } from "./routes/spa-routes";
 import {router} from "lit-element-router";
 import { spacontrollerStyle} from './spa-controller-css.js';
+
+import './spa-linker.js';
+import './spa-main.js';
 
 @customElement('spa-controller')
 @router
@@ -75,8 +78,8 @@ class SpaController extends LitElement {
 
     async retrieveTemplateConfig(current) {
         return {
-            styles: (await import(`./templates/${current}/${current}-css.js`)),
-            content: (await import(`./templates/${current}/${current}-tmpl.js`)).default,
+            styles: (await import(`/pro/src/controller/views/${current}/spa-${current}-css.js`)),
+            content: (await import(`/pro/src/controller/views/${current}/spa-${current}.js`)).default,
             name: current
         };
     }
@@ -115,13 +118,13 @@ class SpaController extends LitElement {
 
     render() {
         return html`
-            <ec-app-main active-route=${this.route}>
+            <spa-main active-route=${this.route}>
                 ${this.content}
-            </ec-app-main>
+            </spa-main>
             <section class="newsletterContainer__buttonNext">
                 ${ROUTES.length !==  this.data.order ? html `
-                    <ec-app-link class="newsletterContainer__buttonWrapper" href="${this.retrieveNextStep()}"><p
-                        class="newsletterContainer__button">Siguiente</p></ec-app-link>
+                    <spa-linker class="newsletterContainer__buttonWrapper" href="${this.retrieveNextStep()}"><p
+                        class="newsletterContainer__button">Siguiente</p></spa-linker>
                 `: html `
                     
                 `}

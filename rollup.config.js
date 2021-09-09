@@ -10,7 +10,7 @@ import alias from '@rollup/plugin-alias';
  * Los navegadores solo aceptan cargar modulos de URLs o rutas relaivas.
  * No bare-names que hagan referencia a paquetes de npm (@babel/plugin-babel)
  */
-import resolve from '@rollup/plugin-node-resolve';
+import resolve, { nodeResolve } from '@rollup/plugin-node-resolve';
 /** Compatibilidad con navegadores antiguos */
 import babel from '@rollup/plugin-babel';
 /** Minifica Javascript */
@@ -48,7 +48,7 @@ const babelConfig = {
     ...{
         exclude: 'node_modules/**',
         presets: [
-            [   
+            [
                 '@babel/preset-env', {
                     useBuiltIns: false,
                     targets: {
@@ -111,6 +111,14 @@ const config = {
         format: 'es'
     },
     plugins: [
+        alias({
+            entries: [
+                { find: '@Controller', replacement: './controller' },
+                { find: '@Components', replacement: './components' },
+                { find: '@Utilities', replacement: './utilities' },
+                { find: '@Modules', replacement: './node_modules' }
+            ]
+        }),
         multi(),
         babel(babelConfig),
         minifyHTML(),
@@ -118,17 +126,13 @@ const config = {
         commonjs({
             namedExports: {
                 'node_modules/@babel/runtime/regenerator/index.js': ['isValidElementType'],
-            } 
+            }
         }),
+        nodeResolve(),
         resolve(),
         replace({
             // Recogemos el valor y lo convertimos
             ENV: JSON.stringify(process.env.NODE_ENV || 'development')
-        }),
-        alias({
-            find: '@Controller', replacement: './controller',
-            find: '@Components', replacement: './components',
-            find: '@Utilities', replacement: './utilities'
         }),
         scss()
     ],

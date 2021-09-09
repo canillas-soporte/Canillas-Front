@@ -5,11 +5,43 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .header {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    html {
+      max-width: 100%;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      box-sizing: border-box;
+    }
+  </style>
 </head>
 <body>
-  <cn-navbar></cn-navbar>
+  <header class="header">
+    <cn-navbar></cn-navbar>
+  </header>
+  <spa-controller></spa-controller>
   <my-element></my-element>
-  <script type="module" src="./build-modern/src/multi-entry.js"></script>
+  <script type="module" src="../build-modern/src/multi-entry.js"></script>
 </body>
 </html>
 

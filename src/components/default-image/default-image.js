@@ -16,7 +16,7 @@ class DefaultImage extends LitElement {
   // Implement `render` to define a template for your element.
   render(){
     /**
-     * Return a lit-html `TemplateResult`.
+     * Return a ../../@Modules/lit-element/lit-element.js `TemplateResult`.
      *
      * To create a `TemplateResult`, tag a JavaScript template literal
      * with the `html` helper function.
