@@ -3,17 +3,9 @@ import { css, html, LitElement } from 'lit-element';
 import { newslettersviewStyle } from './newsletters-view-css';
 
 class Newsletters extends BaseView {
-
-    constructor() {
-        super();
-    }
-
-    get styles() {
-        return newslettersviewStyle;
-    }
-
     render() {
         return html`
+        <link rel="stylesheet" type="text/css" href='${window.location}/src/controller/views/newsletters/newsletters-view.css' />
             <main class="newsletterContainer">
                 <section class="newsletterContainer__suscribed">
                     <h1 class="newsletterContainer__title">

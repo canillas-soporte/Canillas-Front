@@ -1,9 +1,17 @@
-import { LitElement } from "lit-element";
+import { LitElement,css } from "lit-element";
 import { Router } from '@vaadin/router';
 
 export class BaseView extends LitElement {
 
-    
+    get styles() {
+        return css`
+        .newsletterContainer {
+                height: 100%;
+                width: 100%;
+                background: red;
+            }
+        `;
+    }
 
     constructor() {
         super();
