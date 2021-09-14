@@ -4,7 +4,7 @@ import {cnnavnarStyle} from './cn-navnar-css.js';
   class CNNavbar extends LitElement {
 
     get styles() {
-      return cnnavbarStyle;
+      return cnnavnarStyle;
     }
 
     get properties() {
@@ -14,7 +14,7 @@ import {cnnavnarStyle} from './cn-navnar-css.js';
     }
 
     constructor() {
-      console.log(cnnavbarStyle);
+      console.log(cnnavnarStyle);
       super();
       this.text = "Validar";
     }

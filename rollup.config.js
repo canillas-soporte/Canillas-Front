@@ -26,7 +26,7 @@ import scss from 'rollup-plugin-scss';
 import { inlineLitElement } from 'rollup-plugin-inline-lit-element'
 
 // Live server para desplegar
-import { liveServer } from 'rollup-plugin-live-server';
+import  { liveServer } from 'rollup-plugin-live-server';
 
 import multi from '@rollup/plugin-multi-entry';
 
@@ -105,12 +105,21 @@ const configs = [
 
 const config = {
     input: ['src/components/shop-app.js', 'src/components/**/*.js', 'src/controller/**/*.js',
-        'src/controller/*.js'],
+        'src/controller/*.js','src/controller/**/**/*.js'],
     output: {
         dir: `build-modern/src/`,
         format: 'es'
     },
     plugins: [
+        liveServer({
+            port: 8001,
+            host: "0.0.0.0",
+            root: "./build-modern/src/",
+            file: "index.html",
+            mount: [['/dist', './dist'], ['/src', './src'], ['/node_modules', './node_modules']],
+            open: false,
+            wait: 500
+        }),
         multi(),
         babel(babelConfig),
         minifyHTML(),
@@ -123,23 +132,24 @@ const config = {
         resolve(),
         replace({
             // Recogemos el valor y lo convertimos
-            ENV: JSON.stringify(process.env.NODE_ENV || 'development')
+            //ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+            'process.env.NODE_ENV': JSON.stringify('production')
         }),
         alias({
-            find: '@Controller', replacement: './controller',
-            find: '@Components', replacement: './components',
-            find: '@Utilities', replacement: './utilities'
+            find: '@Controller', replacement: './src/controller',
+            find: '@Components', replacement: './src/components',
+            find: '@Utilities', replacement: './src/utilities'
         }),
         scss()
     ],
     preserveEntrySignatures: false,
 }
 
-if (process.env.NODE_DEV === "watch") {
+if (process.env.NODE_DEV === "productdion") {
     config.plugins.push(
         liveServer({
             port: 8001,
-            host: "127.0.0.1",
+            host: "0.0.0.0",
             root: "build-modern",
             file: "index.html",
             mount: [['/dist', './dist'], ['/src', './src'], ['/node_modules', './node_modules']],
@@ -150,7 +160,7 @@ if (process.env.NODE_DEV === "watch") {
 
 if (process.env.NODE_DEV !== 'development') {
     config.plugins.push(terser());
-    config.plugins.push(uglify());
+    //config.plugins.push(uglify());
 }
 
 export default config;
